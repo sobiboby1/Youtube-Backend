@@ -3,16 +3,22 @@
 import dotenv from "dotenv";
 
 import mongoose from "mongoose";
-import {DB_NAME} from "./constants";
+import {DB_NAME} from "./constants.js";
 import connectDB from "./db/index.js";
 
 
-dotenv.config({
-    path: './env'
+dotenv.config({ path: './.env' })
+
+
+connectDB()
+.then(() => {
+    app.listen(process.env.port || 4000, ()=> {
+        console.log(`server is active on ${process.env.port}`);
+    } )
 })
-
-
-connectDB();
+.catch((err) =>{
+console.log("mongo failed")
+});
 
 
 /*
